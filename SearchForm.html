@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <script>
+      function podpowiedz(string) {
+        if (string.length == 0) {
+          document.getElementById('sugestia').innerHTML = '';
+          return;
+        } else {
+          const xmlhttp = new XMLHttpRequest();
+          xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById('sugestia').innerHTML = this.responseText;
+            }
+          };
+          xmlhttp.open('GET', 'List.php?q=' + string, true);
+          xmlhttp.send();
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <p><b>Wpisz litery do input field:</b></p>
+    <form>
+      First name: <input type="text" onkeyup="podpowiedz(this.value)" />
+    </form>
+    <p>Result: <span id="sugestia"></span></p>
+  </body>
+</html>
